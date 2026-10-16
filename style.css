@@ -1,0 +1,76 @@
+@font-face{font-family:'Frank Ruhl Libre';src:url(assets/fonts/FrankRuhlLibre.ttf) format('truetype');font-weight:300 900}
+@font-face{font-family:'Rubik';src:url(assets/fonts/Rubik.ttf) format('truetype');font-weight:300 900}
+:root{--gold:#e8c45a;--bg:#0b1530;--panel:#13224a;--line:#2a4078;--time:#fff7dc}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:#fff;font-family:'Frank Ruhl Libre',serif}
+.t,#clock,.eng{font-family:'Rubik',sans-serif;font-variant-numeric:tabular-nums lining-nums;font-feature-settings:'tnum' 1,'lnum' 1}
+header{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 44px;height:190px;background:#06102a;border-bottom:4px solid var(--gold);box-sizing:border-box}
+.logo{height:160px;justify-self:center}.hdr-r{justify-self:start}.eng{justify-self:end}
+.title{white-space:nowrap;font-size:68px;font-weight:900;color:var(--gold);line-height:1}
+.sub{white-space:nowrap;font-size:34px;font-weight:500;margin-top:6px}.parsha{color:var(--gold)}
+footer{height:120px;display:grid;grid-template-columns:1fr auto 1fr;column-gap:40px;padding:0 44px;align-items:center;background:#06102a;border-top:4px solid var(--gold);box-sizing:border-box}
+#clock{font-size:96px;font-weight:600;letter-spacing:2px;direction:ltr;line-height:1}
+.eng{text-align:left;font-size:32px;color:#d5deef}.eng .small{font-size:24px;color:#8fa0c0;margin-top:6px}
+main{display:grid;grid-template-columns:950px minmax(0,1fr) minmax(0,1fr);gap:26px;padding:20px 36px;height:770px;box-sizing:border-box}
+section{min-width:0;background:var(--panel);border-radius:18px;padding:16px 20px;border:2px solid var(--line)}
+h2{margin:0 0 8px;font-size:50px;font-weight:700;color:var(--gold);text-align:center;border-bottom:2px solid var(--line);padding-bottom:8px}
+/* weekday: label column + 5 fixed time columns, times read LTR */
+.wkgrid{display:grid;grid-template-columns:150px repeat(4,minmax(0,1fr) 22px) minmax(0,1fr)}
+.wkgrid .dot{padding:36px 0;border-bottom:1px solid var(--line);font:700 36px Rubik;color:var(--gold);display:flex;align-items:center;justify-content:center;line-height:1}
+.wkgrid .colhead{font-family:'Rubik';font-size:22px;color:#8fa0c0;text-align:center;padding-bottom:4px}
+.wkgrid .lbl,.wkgrid .cell{padding:36px 0;border-bottom:1px solid var(--line)}
+.wkgrid .lbl{font-size:44px;font-weight:700;line-height:1}.wkgrid .lbl small{display:block;font-size:30px;color:#b8c4dc;font-weight:500;margin-top:6px}
+.wkgrid .cell{font-size:44px;font-weight:600;color:var(--time);letter-spacing:-1px;text-align:center;direction:ltr;line-height:1;align-self:stretch;display:flex;align-items:center;justify-content:center}
+/* key/value panels: label right, times in fixed LTR columns, right-aligned so colons line up */
+.kv{display:grid;grid-template-columns:minmax(0,1fr) 120px;column-gap:10px}
+.kv>div{padding:15px 0;border-bottom:1px solid var(--line);font-size:32px;line-height:1.05;white-space:nowrap;overflow:hidden}
+.kv .k{font-weight:700}.kv .v{font-size:40px;font-weight:600;text-align:right;direction:ltr;color:var(--time)}
+.kv .hl{color:#fbbf24}
+#status{position:absolute;bottom:6px;left:20px;font:20px Rubik;color:#f87171}
+body.shabbos #shabsec,body:not(.shabbos) #wksec{border:4px solid #fbbf24;box-shadow:0 0 30px #fbbf2466}body.shabbos{background:#1a1030}
+.past,.kv .past{color:rgba(255,247,220,.4)!important}.kv .k.past{color:rgba(255,255,255,.45)!important}
+.next,.kv .next{color:#fbbf24!important}.k.next{font-weight:700}
+#shabtitle{white-space:nowrap;overflow:hidden}
+#stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden}
+.wkgrid .lbl{text-align:center}
+.info{font:400 27px/1.3 Rubik,sans-serif;color:#c9d3e6;white-space:nowrap}.info b{color:var(--gold);font-weight:600}.info.l{text-align:left}.info.r{text-align:right}
+.wkgrid .cell{position:relative}.cap{position:absolute;top:2px;left:50%;transform:translateX(-50%);font:500 30px/1 'Frank Ruhl Libre',serif;color:var(--time)!important;opacity:1;white-space:nowrap;letter-spacing:0;direction:rtl}
+#wksec{position:relative}#wkgraphic{display:none;position:absolute;inset:14px;align-items:center;justify-content:center}#wkgraphic img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px}
+body.graphic #wksec>h2,body.graphic #weekday{visibility:hidden}body.graphic #wkgraphic{display:flex}
+/* fixed layout (RTL grid: first column is rightmost): zmanim right, weekday/eruv middle, Shabbos left */
+main{grid-template-columns:minmax(0,1fr) 950px minmax(0,1fr)!important}main>section:last-child{order:1}#wksec{order:2}#shabsec{order:3}
+
+/* Shabbos candles in the background of the two side panels: Friday candle lighting .. +90 min. transform/opacity animations only. */
+#wkgraphic img{min-width:0;flex:1 1 auto}
+.candle{display:none;position:relative;flex:0 0 80px;height:430px;align-self:center}
+body.candles .candle{display:block}
+#zmsec,#shabsec{position:relative;overflow:hidden}#zmsec>:not(.bgc),#shabsec>:not(.bgc){position:relative;z-index:1}
+.bgc{position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+/* single wide pillar candle: body faint, flame a bit stronger */
+.bgc .candle{flex:0 0 220px}.bgc .candle .stem,.bgc .candle .cup{display:none}
+.bgc .candle .foot{width:220px;height:18px;opacity:.16}
+.bgc .candle .stick{bottom:14px;width:150px;height:332px;border-radius:10px 10px 4px 4px/14px 14px 4px 4px;opacity:.16;background:linear-gradient(90deg,#cbbf9f,#fffaf0 30%,#f3ecdc 60%,#bfb497)}
+.bgc .candle .wick{opacity:.3}
+.bgc .candle .flame{width:34px;height:78px;margin-left:-17px;opacity:.42}
+.bgc .candle .glow{width:320px;height:320px;margin-left:-160px;bottom:240px;opacity:.5}
+.candle>div{position:absolute;left:50%;transform:translateX(-50%)}
+.candle .foot{bottom:0;width:80px;height:16px;border-radius:50% 50% 8px 8px/60% 60% 8px 8px;background:linear-gradient(90deg,#6d7686,#e9edf3 35%,#aab3c0 60%,#5c6575)}
+.candle .stem{bottom:14px;width:18px;height:150px;background:linear-gradient(90deg,#5f6878,#eef1f5 40%,#a3acb9 65%,#59616f);border-radius:3px}
+.candle .stem::before,.candle .stem::after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:34px;height:12px;border-radius:50%;background:linear-gradient(90deg,#6d7686,#eef1f5 40%,#9aa3b0)}
+.candle .stem::before{top:40px}.candle .stem::after{top:96px}
+.candle .cup{bottom:160px;width:56px;height:22px;border-radius:4px 4px 50% 50%/4px 4px 100% 100%;background:linear-gradient(90deg,#6d7686,#f2f4f7 38%,#a3acb9 62%,#5c6575)}
+.candle .stick{bottom:178px;width:30px;height:170px;border-radius:3px 3px 0 0;background:linear-gradient(90deg,#d9d0bb,#fffaf0 35%,#f3ecdc 60%,#cfc6b0)}
+.candle .wick{bottom:346px;width:3px;height:12px;background:#2b2118;border-radius:2px}
+.candle .flame{bottom:352px;width:22px;height:52px;margin-left:-11px;transform:none;transform-origin:50% 90%;
+ border-radius:50% 50% 50% 50%/62% 62% 38% 38%;
+ background:radial-gradient(ellipse at 50% 78%,#fff 0 18%,#ffe9a6 34%,#ffb444 58%,rgba(255,120,20,.0) 75%);
+ filter:blur(.4px);animation:flick 2.1s ease-in-out infinite alternate,sway 3.7s ease-in-out infinite}
+.candle .flame .core{position:absolute;left:50%;bottom:5px;width:8px;height:14px;margin-left:-4px;transform:none;border-radius:50%;background:radial-gradient(ellipse,#6fa2ff 0,rgba(90,140,255,.35) 55%,transparent 75%);opacity:.7}
+.candle .glow{bottom:300px;width:200px;height:200px;margin-left:-100px;transform:none;border-radius:50%;
+ background:radial-gradient(circle,rgba(255,196,96,.40) 0,rgba(255,170,60,.16) 35%,rgba(255,160,40,0) 68%);animation:glow 2.1s ease-in-out infinite alternate}
+.candle.c2 .flame{animation-duration:2.6s,4.3s;animation-delay:-.7s,-1.9s}.candle.c2 .glow{animation-duration:2.6s;animation-delay:-.7s}
+@keyframes flick{0%{transform:scale(1,1)}20%{transform:scale(.96,1.06)}45%{transform:scale(1.03,.95)}70%{transform:scale(.97,1.08)}100%{transform:scale(1.02,.98)}}
+.candle .flame{will-change:transform}
+@keyframes sway{0%,100%{rotate:-2deg;translate:0 0}30%{rotate:2.5deg;translate:1px 0}60%{rotate:-1deg;translate:-1px -1px}80%{rotate:1.5deg;translate:.5px 0}}
+@keyframes glow{0%{opacity:.75;transform:scale(.96)}50%{opacity:1;transform:scale(1.03)}100%{opacity:.85;transform:scale(.99)}}
+
+#wksec h2 .wkparsha{display:inline;font-size:.7em;font-weight:400;opacity:.85;margin-right:.4em}
