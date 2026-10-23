@@ -1,0 +1,16 @@
+<!doctype html><html lang="he" dir="rtl" translate="no" class="notranslate"><head><meta charset="utf-8"><meta name="google" content="notranslate"><title>ביהמ"ד בית שבתי – זמנים</title><link rel="stylesheet" href="style.css?v=20261023180627"></head><body><div id="stage">
+<header>
+ <div class="hdr-r"><div class="title">ביהמ"ד בית שבתי</div><div class="sub"><span id="dayname"></span> · <span id="hebdate"></span></div><div class="sub parsha" id="parsha"></div></div>
+ <img class="logo" src="assets/logo-bais-shabsi.png" alt="logo">
+ <div class="eng" dir="ltr"><div id="engdate"></div><div class="small">Congregation Bais Shabsi · Lakewood, NJ</div></div>
+</header>
+<main>
+ <section class="wide" id="wksec"><h2>זמני תפילה – ימות החול<small id="wkparsha" class="wkparsha"></small></h2><div id="weekday" class="wkgrid"></div><div id="wkgraphic"><div class="gwrap"><img src="assets/shabbos-graphic.jpg" alt=""><div class="eruvlbl"><span>הערוב:</span><span class="tlight" aria-hidden="true"><i class="g"></i><i class="y"></i><i class="r"></i></span></div></div></div></section>
+ <section id="shabsec"><div class="bgc" aria-hidden="true"><div class="candle c1" aria-hidden="true"><div class="glow"></div><div class="flame"><div class="core"></div></div><div class="wick"></div><div class="stick"></div><div class="cup"></div><div class="stem"></div><div class="foot"></div></div></div><h2 id="shabtitle">שבת קודש</h2><div id="shabbos" class="kv"></div></section>
+ <section id="zmsec"><div class="bgc" aria-hidden="true"><div class="candle c1" aria-hidden="true"><div class="glow"></div><div class="flame"><div class="core"></div></div><div class="wick"></div><div class="stick"></div><div class="cup"></div><div class="stem"></div><div class="foot"></div></div></div><h2>זמני היום</h2><div id="zmanim" class="kv"></div><div id="dafyomi" class="dafyomi"></div></section>
+</main><footer dir="ltr"><div class="info l">Text <b>833-491-7069</b><br>to receive zmanim updates</div><div id="clock"></div><div class="info r">For the weekly PDF email a request to:<br><b>baisshabsi@gmail.com</b></div></footer><div id="status"></div></div>
+<script>/* Fit the 1920x1080 stage to any window: top-left origin, explicit pixel offsets, all inline (no dependency on cached CSS). */
+function fit(){var st=document.getElementById("stage");if(!st)return;var de=document.documentElement,W=de.clientWidth||innerWidth,H=de.clientHeight||innerHeight,s=Math.min(W/1920,H/1080),x=(W-1920*s)/2,y=(H-1080*s)/2;
+var b=document.body.style;b.margin="0";b.overflow="hidden";de.style.overflow="hidden";
+var t=st.style;t.position="absolute";t.left="0";t.top="0";t.width="1920px";t.height="1080px";t.transformOrigin="0 0";t.transform="translate("+x+"px,"+y+"px) scale("+s+")";}
+fit();addEventListener("resize",fit);addEventListener("load",fit);document.addEventListener("fullscreenchange",fit);if(document.fonts)document.fonts.ready.then(fit);setInterval(fit,10000);</script><script src="zmanim.js?v=20261023180627"></script><script src="schedule.js?v=20261023180627"></script><script src="app.js?v=20261023180627"></script></body></html>
